@@ -1,0 +1,52 @@
+# This tnsnames.ora contains examples of the recommended connection strings
+# for the application continuous availability, to be used for all Oracle Database
+# versions after 12.2 whenever the database is configured with high availability
+# products such as Oracle Real Application Clusters or Oracle Data Guard.
+#
+# If using a tnsnames.ora file for resolving aliases to connect descriptors,
+# the file can be in a default location such as
+# $ORACLE_HOME/network/admin/tnsnames.ora or /etc/tnsnames.ora.
+# Alternatively, set the TNS_ADMIN environment variable
+# and put the file in $TNS_ADMIN/tnsnames.ora.
+#
+# When using Oracle Autonomous Database, the wallet downloaded to connect to
+# the Autonomous Database services, already contains a tnsnames.ora with
+# similar connection strings.
+#
+# Read more:
+#
+# "Net Services Administrator's Guide - Configuring Naming Methods"
+# https://docs.oracle.com/en/database/oracle/oracle-database/19/netag/configuring-naming-methods.html#GUID-E5B6BEB9-70BB-46FA-9F6C-BE575CD41B21
+#
+# "High Availability Overview and Best Practices - Configuring Continuous Availability for Applications"
+# https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/configuring-continuous-availability-applicationsconfiguring-continuous-availability-applicatio.html#GUID-5EBF37EA-48AB-4508-A14E-86A2583A24BF
+#
+# "High Availability Overview and Best Practices - Step 2: Configure the Connection String for High Availability
+# https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/configuring-level-1-basic-application-high-availability.html#GUID-526F4E44-1F2B-427B-A96F-3243CEF3DA17
+
+
+# Connection descriptor for an Oracle Real Application Clusters database
+# without an Oracle Data Guard standby database
+my_rac_service_alias =
+  (DESCRIPTION =
+    (CONNECT_TIMEOUT= 90)(RETRY_COUNT=30)(RETRY_DELAY=2)
+    (TRANSPORT_CONNECT_TIMEOUT=1000ms)
+    (ADDRESS_LIST =
+      (LOAD_BALANCE=on)
+      (ADDRESS = (PROTOCOL = TCP)(HOST=clu_site1-scan)(PORT=1521)))
+    (CONNECT_DATA=(SERVICE_NAME = my_service)))
+
+
+# Connection descriptor for an Oracle Real Application Clusters database
+# with an Oracle Data Guard standby database
+my_rac_dg_service_alias =
+  (DESCRIPTION =
+    (CONNECT_TIMEOUT= 90)(RETRY_COUNT=150)(RETRY_DELAY=2)
+    (TRANSPORT_CONNECT_TIMEOUT=1000ms)
+    (ADDRESS_LIST =
+      (LOAD_BALANCE=on)
+      (ADDRESS = (PROTOCOL = TCP)(HOST=clu_site1-scan)(PORT=1521)))
+    (ADDRESS_LIST =
+      (LOAD_BALANCE=on)
+      (ADDRESS = (PROTOCOL = TCP)(HOST=clu_site2-scan)(PORT=1521)))
+    (CONNECT_DATA=(SERVICE_NAME = my_service)))
