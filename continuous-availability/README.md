@@ -23,9 +23,9 @@ Depending on your application's high availability requirements, you can implemen
 
 Follow these steps to implement faster, automatic failover to an available database instance:
 
-1. [Configure database services with high availability](./services/README.md)
-2. [Configure the connection strings for high availability](./connection-strings/README.md)
-3. [Ensure that FAN is used](./fan/README.md)
+1. [Configure database services with high availability](./services/)
+2. [Configure the connection strings for high availability](./connection-strings/)
+3. [Ensure that FAN is used](https://docs.oracle.com/en/database/oracle/oracle-database/19/haovw/configuring-level-1-basic-application-high-availability.html#GUID-2EFA9025-50E7-4E0F-8EDE-B815973005A2)
 4. Ensure Application Implements Reconnection Logic.<br />
    Find the examples for each language in their respective folders in the repository root directory.
 
